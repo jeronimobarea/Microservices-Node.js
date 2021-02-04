@@ -1,0 +1,28 @@
+{
+  "name": "platzi_social",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/api/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeronimobarea/platzi_social.git"
+  },
+  "author": "jero",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jeronimobarea/platzi_social/issues"
+  },
+  "homepage": "https://github.com/jeronimobarea/platzi_social#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "nanoid": "^3.1.20"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
