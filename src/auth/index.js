@@ -4,6 +4,10 @@ const error = require('../utils/error')
 
 const secret = config.jwt.secret
 
+function sign(data) {
+    return jwt.sign(data, secret)
+}
+
 function getToken(auth) {
     if (!auth) {
         throw new Error('No token provided')
@@ -40,6 +44,6 @@ const check = {
 }
 
 module.exports = {
-    sign: (data) => jwt.sign(data, secret),
+    sign,
     check,
 }
