@@ -4,7 +4,6 @@ const config = require('../config.js')
 
 const auth = require('./components/auth/network')
 const user = require('./components/user/network')
-const post = require('./components/post/network')
 
 const errors = require('../network/errors')
 
@@ -18,7 +17,6 @@ app.use(express.json())
 // Router
 app.use('/api/auth', auth)
 app.use('/api/users', user)
-app.use('/api/posts', post)
 
 app.use(errors)
 
