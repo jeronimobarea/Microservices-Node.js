@@ -8,9 +8,9 @@ function sign(data) {
     return jwt.sign(data, secret)
 }
 
-function getToken(auth) {
+function _getToken(auth) {
     if (!auth) {
-        throw new Error('No token provided')
+        throw error('No token provided', 400)
     }
 
     if (auth.indexOf('Bearer ') === -1) {
@@ -19,14 +19,14 @@ function getToken(auth) {
     return auth.replace('Bearer ', '').trim()
 }
 
-function verify(token) {
+function _verify(token) {
     return jwt.verify(token, secret)
 }
 
-function decodeHeader(req) {
+function _decodeHeader(req) {
     const authorization = req.headers.authorization || ''
-    const token = getToken(authorization)
-    const decoded = verify(token)
+    const token = _getToken(authorization)
+    const decoded = _verify(token)
 
     req.user = decoded
     return decoded
@@ -34,13 +34,16 @@ function decodeHeader(req) {
 
 const check = {
     own: (req, owner) => {
-        const decoded = decodeHeader(req)
+        const decoded = _decodeHeader(req)
         console.log(decoded)
 
         if (decoded.id !== owner) {
             throw error('Permission denied', 401)
         }
-    }
+    },
+    logged: function (req, owner) {
+        const decoded = _decodeHeader(req);
+    },
 }
 
 module.exports = {

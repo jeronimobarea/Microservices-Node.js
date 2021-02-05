@@ -7,12 +7,10 @@ const router = express.Router()
 
 router.use(express.json())
 
-router.post('/login', (req, res) => {
+router.post('/login', (req, res, next) => {
     Controller.login(req.body.username, req.body.password).then(token => {
         response.success(req, res, token, 200)
-    }).catch(error => {
-        response.error(req, res, 'Invalid data', 400)
-    })
+    }).catch(next)
 })
 
 module.exports = router

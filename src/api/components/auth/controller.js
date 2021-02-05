@@ -1,16 +1,18 @@
 const bcrypt = require('bcrypt')
+
 const auth = require('../../../auth')
+const error = require('../../../utils/error')
+
 const TABLE = 'auth'
 
 module.exports = (store = require('../../../store/dummy')) => {
 
     async function login(username, password) {
         const data = await store.query(TABLE, {username: username})
-
         if (!bcrypt.compare(password, data.password)) {
-            throw new Error('Invalid data')
+            throw error('Invalid username or password', 400)
         }
-        return auth.sign(data)
+        return auth.sign({...data})
     }
 
     async function upsert(data) {
