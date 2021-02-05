@@ -38,9 +38,8 @@ module.exports = (store = require('../../../store/dummy')) => {
     }
 
     async function following(user) {
-        const join = {
-            TABLE: 'user_to'
-        }
+        const join = {}
+        join[TABLE] = 'user_to'
         const query = {user_from: user}
         return await store.query(TABLE + '_follow', query, join)
     }

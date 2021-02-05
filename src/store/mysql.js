@@ -75,10 +75,10 @@ async function upsert(table, data) {
     if (data && data.id) {
         return update(table, data);
     }
-    return insert(table, data);
+    return insert(table, data)
 }
 
-function query(table, q, join) {
+function query(table, query_param, join) {
     let joinQuery = ''
     if (join) {
         const key = Object.keys(join)[0]
@@ -87,7 +87,7 @@ function query(table, q, join) {
     }
 
     return new Promise((resolve, reject) => {
-        connection.query(`SELECT * FROM ${table} ${joinQuery} WHERE ${table}.?`, query, (err, res) => {
+        connection.query(`SELECT * FROM ${table} ${joinQuery} WHERE ${table}.?`, query_param, (err, res) => {
             if (err) return reject(err)
             resolve(res[0] || null)
         })

@@ -1,10 +1,12 @@
 const express = require('express')
 
 const config = require('../config.js')
-const user = require('./components/user/network')
-const auth = require('./components/auth/network')
-const errors = require('../network/errors')
 
+const auth = require('./components/auth/network')
+const user = require('./components/user/network')
+const post = require('./components/post/network')
+
+const errors = require('../network/errors')
 
 const app = express()
 
@@ -14,8 +16,9 @@ app.use(express.urlencoded({
 app.use(express.json())
 
 // Router
-app.use('/api/user', user)
 app.use('/api/auth', auth)
+app.use('/api/users', user)
+app.use('/api/posts', post)
 
 app.use(errors)
 
